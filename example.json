@@ -28,18 +28,6 @@
       },
       {
         "configuration": {
-          "data": {
-            "sourceOutput": "document",
-            "targetInput": "document"
-          }
-        },
-        "name": "FlowInputNodeFlowInputNode0ToFlowOutputNode_1FlowOutputNode0",
-        "source": "FlowInputNode",
-        "target": "FlowOutputNode_1",
-        "type": "Data"
-      },
-      {
-        "configuration": {
           "conditional": {
             "condition": "default"
           }
@@ -59,6 +47,30 @@
         "name": "FlowInputNodeFlowInputNode0ToFlowOutputNode_2FlowOutputNode0",
         "source": "FlowInputNode",
         "target": "FlowOutputNode_2",
+        "type": "Data"
+      },
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "document",
+            "targetInput": "codeHookInput"
+          }
+        },
+        "name": "FlowInputNodeFlowInputNode0ToLambdaFunctionNode_1LambdaFunctionNode0",
+        "source": "FlowInputNode",
+        "target": "LambdaFunctionNode_1",
+        "type": "Data"
+      },
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "functionResponse",
+            "targetInput": "document"
+          }
+        },
+        "name": "LambdaFunctionNode_1LambdaFunctionNode0ToFlowOutputNode_1FlowOutputNode0",
+        "source": "LambdaFunctionNode_1",
+        "target": "FlowOutputNode_1",
         "type": "Data"
       }
     ],
@@ -127,6 +139,28 @@
         ],
         "name": "FlowOutputNode_2",
         "type": "Output"
+      },
+      {
+        "configuration": {
+          "lambdaFunction": {
+            "lambdaArn": "arn:aws:lambda:eu-central-1:356161743682:function:amplify-login-custom-message-4497ef0c:$LATEST"
+          }
+        },
+        "inputs": [
+          {
+            "expression": "$.data",
+            "name": "codeHookInput",
+            "type": "String"
+          }
+        ],
+        "name": "LambdaFunctionNode_1",
+        "outputs": [
+          {
+            "name": "functionResponse",
+            "type": "String"
+          }
+        ],
+        "type": "LambdaFunction"
       }
     ]
   },
@@ -134,6 +168,6 @@
   "id": "0XE4WXCT1P",
   "name": "TestFlow",
   "status": "NotPrepared",
-  "updatedAt": "2025-03-13T14:20:44.153974+00:00",
+  "updatedAt": "2025-03-13T20:36:33.353856+00:00",
   "version": "DRAFT"
 }

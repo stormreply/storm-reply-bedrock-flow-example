@@ -1,4 +1,3 @@
-import { Position } from "@vue-flow/core";
 import { type BaseNode } from "~/types";
 
 /**
@@ -8,7 +7,7 @@ export function transformNodes(nodes: BaseNode[]) {
   return nodes.map((node) => {
     return {
       id: node.name,
-      position: { x: 150, y: 50 },
+      position: { x: 0, y: 0 },
       data: {
         ...node,
       },
