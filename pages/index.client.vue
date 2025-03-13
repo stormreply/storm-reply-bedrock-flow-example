@@ -1,11 +1,21 @@
 <script setup lang="ts">
+import { markRaw } from "vue";
 import Example from "~/example.json";
 import { transformNodes } from "~/lib/node";
 import { VueFlow, useVueFlow, Position } from "@vue-flow/core";
 import { transformConnections } from "~/lib/edge";
 import { Background } from "@vue-flow/background";
+import { ConditionNode, InputNode, OutputNode } from "#components";
+
 const { layout } = useLayout();
 const { fitView } = useVueFlow();
+
+const nodeTypes = {
+  Condition: markRaw(ConditionNode),
+  Input: markRaw(InputNode),
+  Output: markRaw(OutputNode),
+};
+
 const edges = ref([]);
 const nodes = ref([]);
 onMounted(() => {
@@ -21,21 +31,12 @@ async function layoutGraph(direction) {
 </script>
 <template>
   <VueFlow
-    :nodes="nodes"
-    :edges="edges"
+    :nodes
+    :edges
+    :nodeTypes
     style="height: 100vh; width: 100%"
     @nodes-initialized="layoutGraph('LR')"
   >
-    <Background pattern-color="#aaa" gap="20"></Background>
-    <template #node-Input="props">
-      <InputNode v-bind="props" />
-    </template>
-    <template #node-Output="props">
-      <div class="node-title">Output</div>
-      <div class="node-id">{{ props.id }}</div>
-    </template>
-    <template #node-Condition="props">
-      <ConditionNode v-bind="props" />
-    </template>
+    <Background pattern-color="#aaa" :gap="20"></Background>
   </VueFlow>
 </template>

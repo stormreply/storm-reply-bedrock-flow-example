@@ -28,6 +28,7 @@ function resolveHandle(connection: Connection) {
   if (connection.type === "Conditional") {
     return {
       sourceHandle: connection.configuration.conditional.condition,
+      targetHandle: "node-handle",
     };
   }
 
