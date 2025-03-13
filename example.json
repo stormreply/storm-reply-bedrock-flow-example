@@ -1,0 +1,83 @@
+{
+  "arn": "arn:aws:bedrock:eu-central-1:356161743682:flow/0XE4WXCT1P",
+  "createdAt": "2025-03-13T12:10:21.274124+00:00",
+  "definition": {
+    "connections": [
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "document",
+            "targetInput": "codeHookInput"
+          }
+        },
+        "name": "FlowInputNodeFlowInputNode0ToLambdaFunctionNode_1LambdaFunctionNode0",
+        "source": "FlowInputNode",
+        "target": "LambdaFunctionNode_1",
+        "type": "Data"
+      },
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "functionResponse",
+            "targetInput": "document"
+          }
+        },
+        "name": "LambdaFunctionNode_1LambdaFunctionNode0ToFlowOutputNodeFlowOutputNode0",
+        "source": "LambdaFunctionNode_1",
+        "target": "FlowOutputNode",
+        "type": "Data"
+      }
+    ],
+    "nodes": [
+      {
+        "configuration": {
+          "input": {}
+        },
+        "name": "FlowInputNode",
+        "outputs": [
+          {
+            "name": "document",
+            "type": "String"
+          }
+        ],
+        "type": "Input"
+      },
+      {
+        "configuration": {
+          "output": {}
+        },
+        "inputs": [
+          {
+            "expression": "$.data",
+            "name": "document",
+            "type": "String"
+          }
+        ],
+        "name": "FlowOutputNode",
+        "type": "Output"
+      },
+      {
+        "configuration": {
+          "lambdaFunction": {
+            "lambdaArn": "arn:aws:lambda:eu-central-1:356161743682:function:prtlzr-mvp-AuthNestedStac-DisableUserFunction4F2E2-0SLMktx6VR5J:$LATEST"
+          }
+        },
+        "inputs": [
+          {
+            "expression": "$.data",
+            "name": "codeHookInput",
+            "type": "String"
+          }
+        ],
+        "name": "LambdaFunctionNode_1",
+        "outputs": [
+          {
+            "name": "functionResponse",
+            "type": "String"
+          }
+        ],
+        "type": "LambdaFunction"
+      }
+    ]
+  }
+}
