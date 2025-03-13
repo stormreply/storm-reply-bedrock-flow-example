@@ -1,3 +1,4 @@
+import { Position } from "@vue-flow/core";
 import { type BaseNode } from "~/types";
 
 /**
