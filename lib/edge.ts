@@ -9,6 +9,7 @@ export function transformConnections(connections: Connection[]) {
       },
       source: connection.source,
       target: connection.target,
+      type: connection.type,
     };
   });
 }

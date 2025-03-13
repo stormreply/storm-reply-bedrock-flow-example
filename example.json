@@ -7,24 +7,58 @@
         "configuration": {
           "data": {
             "sourceOutput": "document",
-            "targetInput": "codeHookInput"
+            "targetInput": "conditionInput"
           }
         },
-        "name": "FlowInputNodeFlowInputNode0ToLambdaFunctionNode_1LambdaFunctionNode0",
+        "name": "FlowInputNodeFlowInputNode0ToConditionNode_1ConditionNode0",
         "source": "FlowInputNode",
-        "target": "LambdaFunctionNode_1",
+        "target": "ConditionNode_1",
         "type": "Data"
       },
       {
         "configuration": {
+          "conditional": {
+            "condition": "Condition"
+          }
+        },
+        "name": "ConditionNode_1ConditionNodeHandle0ToFlowOutputNode_1FlowOutputNode_1HeaderHandle",
+        "source": "ConditionNode_1",
+        "target": "FlowOutputNode_1",
+        "type": "Conditional"
+      },
+      {
+        "configuration": {
           "data": {
-            "sourceOutput": "functionResponse",
+            "sourceOutput": "document",
             "targetInput": "document"
           }
         },
-        "name": "LambdaFunctionNode_1LambdaFunctionNode0ToFlowOutputNodeFlowOutputNode0",
-        "source": "LambdaFunctionNode_1",
-        "target": "FlowOutputNode",
+        "name": "FlowInputNodeFlowInputNode0ToFlowOutputNode_1FlowOutputNode0",
+        "source": "FlowInputNode",
+        "target": "FlowOutputNode_1",
+        "type": "Data"
+      },
+      {
+        "configuration": {
+          "conditional": {
+            "condition": "default"
+          }
+        },
+        "name": "ConditionNode_1ConditionNodeHandleDefaultConditionNode_1ToFlowOutputNode_2FlowOutputNode_2HeaderHandle",
+        "source": "ConditionNode_1",
+        "target": "FlowOutputNode_2",
+        "type": "Conditional"
+      },
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "document",
+            "targetInput": "document"
+          }
+        },
+        "name": "FlowInputNodeFlowInputNode0ToFlowOutputNode_2FlowOutputNode0",
+        "source": "FlowInputNode",
+        "target": "FlowOutputNode_2",
         "type": "Data"
       }
     ],
@@ -53,31 +87,53 @@
             "type": "String"
           }
         ],
-        "name": "FlowOutputNode",
+        "name": "FlowOutputNode_1",
         "type": "Output"
       },
       {
         "configuration": {
-          "lambdaFunction": {
-            "lambdaArn": "arn:aws:lambda:eu-central-1:356161743682:function:prtlzr-mvp-AuthNestedStac-DisableUserFunction4F2E2-0SLMktx6VR5J:$LATEST"
+          "condition": {
+            "conditions": [
+              {
+                "expression": "conditionInput == \"test\"",
+                "name": "Condition"
+              },
+              {
+                "name": "default"
+              }
+            ]
           }
         },
         "inputs": [
           {
             "expression": "$.data",
-            "name": "codeHookInput",
+            "name": "conditionInput",
             "type": "String"
           }
         ],
-        "name": "LambdaFunctionNode_1",
-        "outputs": [
+        "name": "ConditionNode_1",
+        "type": "Condition"
+      },
+      {
+        "configuration": {
+          "output": {}
+        },
+        "inputs": [
           {
-            "name": "functionResponse",
+            "expression": "$.data",
+            "name": "document",
             "type": "String"
           }
         ],
-        "type": "LambdaFunction"
+        "name": "FlowOutputNode_2",
+        "type": "Output"
       }
     ]
-  }
+  },
+  "executionRoleArn": "arn:aws:iam::356161743682:role/service-role/AmazonBedrockExecutionRoleForFlows_ESDAENFNNNH",
+  "id": "0XE4WXCT1P",
+  "name": "TestFlow",
+  "status": "NotPrepared",
+  "updatedAt": "2025-03-13T14:20:44.153974+00:00",
+  "version": "DRAFT"
 }

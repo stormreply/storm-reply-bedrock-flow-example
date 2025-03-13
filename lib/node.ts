@@ -8,10 +8,10 @@ export function transformNodes(nodes: BaseNode[]) {
     return {
       id: node.name,
       position: { x: 150, y: 50 },
-      type: "custom",
       data: {
         ...node,
       },
+      type: node.type,
     };
   });
 }
