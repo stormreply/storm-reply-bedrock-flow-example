@@ -45,14 +45,6 @@ function onConnect(params) {
 
   addEdges(params);
 }
-
-function onConnectStart({ nodeId, handleType }) {
-  console.log("on connect start", { nodeId, handleType });
-}
-
-function onConnectEnd(event) {
-  console.log("on connect end", event);
-}
 </script>
 <template>
   <VueFlow
@@ -62,8 +54,6 @@ function onConnectEnd(event) {
     style="height: 100vh; width: 100%"
     @nodes-initialized="layoutGraph('LR')"
     @connect="onConnect"
-    @connect-start="onConnectStart"
-    @connect-end="onConnectEnd"
   >
     <Background pattern-color="#aaa" :gap="20"></Background>
   </VueFlow>

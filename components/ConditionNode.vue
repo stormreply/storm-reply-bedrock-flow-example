@@ -1,12 +1,6 @@
 <script setup>
-import { Handle } from "@vue-flow/core";
-import { Position } from "@vue-flow/core";
-// Condition component
+import NodeHandleSource from "./NodeHandleSource.vue";
 const { nodeColor = "#ff9f1c" } = defineProps(["nodeColor"]);
-function isValidConnection(connection) {
-  console.log(connection);
-  return true;
-}
 </script>
 <template>
   <div
@@ -32,13 +26,7 @@ function isValidConnection(connection) {
           {{ target.expression }}
         </div>
 
-        <Handle
-          :id="target.name"
-          type="target"
-          :position="Position.Left"
-          class="handle-data"
-          :is-valid-connection="isValidConnection"
-        />
+        <DataHandleTarget :id="target.name" />
       </div>
     </template>
 
@@ -53,13 +41,8 @@ function isValidConnection(connection) {
       <div class="p-1 relative text-right flex items-center">
         <p class="ml-16 mr-2 text-sm font-sm">{{ source.name }}</p>
         <p class="ml-16 mr-2 text-sm font-sm">{{ source.expression }}</p>
-        <Handle
-          :id="source.name"
-          type="source"
-          :position="Position.Right"
-          class="handle-condition"
-          :is-valid-connection="isValidConnection"
-        />
+
+        <NodeHandleSource :id="source.name"></NodeHandleSource>
       </div>
     </template>
   </div>

@@ -1,12 +1,5 @@
 <script setup>
-import { Handle } from "@vue-flow/core";
-import { Position } from "@vue-flow/core";
-// Input Node can only have outputs
 const { nodeColor = "#4361ee" } = defineProps(["nodeColor"]);
-function isValidConnection(connection) {
-  console.log(connection);
-  return true;
-}
 </script>
 <template>
   <div
@@ -27,13 +20,7 @@ function isValidConnection(connection) {
         <p class="ml-16 mr-2 text-sm font-sm">
           {{ source.name }}: {{ source.type }}
         </p>
-        <Handle
-          :id="source.name"
-          type="source"
-          :position="Position.Right"
-          class="handle-data"
-          :is-valid-connection="isValidConnection"
-        />
+        <DataHandleSource :id="source.name" />
       </div>
     </template>
   </div>
