@@ -5,6 +5,7 @@ import { Position } from "@vue-flow/core";
 const { nodeColor = "#6366f1" } = defineProps(["nodeColor"]);
 function isValidConnection(connection) {
   console.log(connection);
+  return true;
 }
 </script>
 <template>
@@ -30,7 +31,9 @@ function isValidConnection(connection) {
     <!-- Input items -->
     <template v-for="target of $attrs.data.inputs" :key="target.name">
       <div class="p-1 pl-0 relative flex items-center">
-        <div class="ml-2 text-sm font-sm">{{ target.name }}</div>
+        <div class="ml-2 text-sm font-sm">
+          {{ target.name }}: {{ target.type }}
+        </div>
         <Handle
           :id="target.name"
           type="target"

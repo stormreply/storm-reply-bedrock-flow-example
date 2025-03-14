@@ -6,6 +6,7 @@ const { title, nodeColor } = useLambdaMapping();
 
 function isValidConnection(connection) {
   console.log(connection);
+  return true;
 }
 </script>
 
@@ -33,7 +34,9 @@ function isValidConnection(connection) {
     <p class="font-lg ml-2">Inputs</p>
     <template v-for="target of $attrs.data.inputs" :key="target.name">
       <div class="p-1 pl-0 relative flex items-center">
-        <div class="ml-2 text-sm font-sm">{{ target.name }}</div>
+        <div class="ml-2 text-sm font-sm">
+          {{ target.name }}: {{ target.type }}
+        </div>
         <Handle
           :id="target.name"
           type="target"
@@ -49,7 +52,10 @@ function isValidConnection(connection) {
     <p class="font-lg mr-2 flex justify-end">Outputs</p>
     <template v-for="source of $attrs.data.outputs" :key="source.name">
       <div class="p-1 relative text-right flex items-center">
-        <p class="ml-16 mr-2 text-sm font-sm">{{ source.name }}</p>
+        <p class="ml-16 mr-1 text-sm font-sm">
+          {{ source.name }}: {{ source.type }}
+        </p>
+
         <Handle
           :id="source.name"
           type="source"
