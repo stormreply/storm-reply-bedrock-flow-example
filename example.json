@@ -6,25 +6,14 @@
       {
         "configuration": {
           "data": {
-            "sourceOutput": "document",
-            "targetInput": "conditionInput"
+            "sourceOutput": "functionResponse",
+            "targetInput": "document"
           }
         },
-        "name": "FlowInputNodeFlowInputNode0ToConditionNode_1ConditionNode0",
-        "source": "FlowInputNode",
-        "target": "ConditionNode_1",
-        "type": "Data"
-      },
-      {
-        "configuration": {
-          "conditional": {
-            "condition": "Condition"
-          }
-        },
-        "name": "ConditionNode_1ConditionNodeHandle0ToFlowOutputNode_1FlowOutputNode_1HeaderHandle",
-        "source": "ConditionNode_1",
+        "name": "LambdaFunctionNode_1LambdaFunctionNode0ToFlowOutputNode_1FlowOutputNode0",
+        "source": "LambdaFunctionNode_1",
         "target": "FlowOutputNode_1",
-        "type": "Conditional"
+        "type": "Data"
       },
       {
         "configuration": {
@@ -32,22 +21,21 @@
             "condition": "default"
           }
         },
-        "name": "ConditionNode_1ConditionNodeHandleDefaultConditionNode_1ToFlowOutputNode_2FlowOutputNode_2HeaderHandle",
+        "name": "ConditionNode_1ConditionNodeHandleDefaultConditionNode_1ToLambdaFunctionNode_1LambdaFunctionNode_1HeaderHandle",
         "source": "ConditionNode_1",
-        "target": "FlowOutputNode_2",
+        "target": "LambdaFunctionNode_1",
         "type": "Conditional"
       },
       {
         "configuration": {
-          "data": {
-            "sourceOutput": "document",
-            "targetInput": "document"
+          "conditional": {
+            "condition": "Condition"
           }
         },
-        "name": "FlowInputNodeFlowInputNode0ToFlowOutputNode_2FlowOutputNode0",
-        "source": "FlowInputNode",
-        "target": "FlowOutputNode_2",
-        "type": "Data"
+        "name": "ConditionNode_1ConditionNodeHandle0ToLambdaFunctionNode_2LambdaFunctionNode_2HeaderHandle",
+        "source": "ConditionNode_1",
+        "target": "LambdaFunctionNode_2",
+        "type": "Conditional"
       },
       {
         "configuration": {
@@ -56,9 +44,57 @@
             "targetInput": "codeHookInput"
           }
         },
-        "name": "FlowInputNodeFlowInputNode0ToLambdaFunctionNode_1LambdaFunctionNode0",
+        "name": "FlowInputNodeFlowInputNode0ToLambdaFunctionNode_3LambdaFunctionNode0",
         "source": "FlowInputNode",
+        "target": "LambdaFunctionNode_3",
+        "type": "Data"
+      },
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "functionResponse",
+            "targetInput": "codeHookInput"
+          }
+        },
+        "name": "LambdaFunctionNode_3LambdaFunctionNode0ToLambdaFunctionNode_2LambdaFunctionNode0",
+        "source": "LambdaFunctionNode_3",
+        "target": "LambdaFunctionNode_2",
+        "type": "Data"
+      },
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "functionResponse",
+            "targetInput": "codeHookInput"
+          }
+        },
+        "name": "LambdaFunctionNode_3LambdaFunctionNode0ToLambdaFunctionNode_1LambdaFunctionNode0",
+        "source": "LambdaFunctionNode_3",
         "target": "LambdaFunctionNode_1",
+        "type": "Data"
+      },
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "functionResponse",
+            "targetInput": "conditionInput"
+          }
+        },
+        "name": "LambdaFunctionNode_3LambdaFunctionNode0ToConditionNode_1ConditionNode0",
+        "source": "LambdaFunctionNode_3",
+        "target": "ConditionNode_1",
+        "type": "Data"
+      },
+      {
+        "configuration": {
+          "data": {
+            "sourceOutput": "functionResponse",
+            "targetInput": "codeHookInput"
+          }
+        },
+        "name": "LambdaFunctionNode_2LambdaFunctionNode0ToLambdaFunctionNode_4LambdaFunctionNode0",
+        "source": "LambdaFunctionNode_2",
+        "target": "LambdaFunctionNode_4",
         "type": "Data"
       },
       {
@@ -68,9 +104,9 @@
             "targetInput": "document"
           }
         },
-        "name": "LambdaFunctionNode_1LambdaFunctionNode0ToFlowOutputNode_1FlowOutputNode0",
-        "source": "LambdaFunctionNode_1",
-        "target": "FlowOutputNode_1",
+        "name": "LambdaFunctionNode_4LambdaFunctionNode0ToFlowOutputNode_2FlowOutputNode0",
+        "source": "LambdaFunctionNode_4",
+        "target": "FlowOutputNode_2",
         "type": "Data"
       }
     ],
@@ -118,7 +154,7 @@
         },
         "inputs": [
           {
-            "expression": "$.data",
+            "expression": "$.data.conditionInput",
             "name": "conditionInput",
             "type": "String"
           }
@@ -143,7 +179,51 @@
       {
         "configuration": {
           "lambdaFunction": {
-            "lambdaArn": "arn:aws:lambda:eu-central-1:356161743682:function:amplify-login-custom-message-4497ef0c:$LATEST"
+            "lambdaArn": "arn:aws:lambda:eu-central-1:356161743682:function:Claude:$LATEST"
+          }
+        },
+        "inputs": [
+          {
+            "expression": "$.data",
+            "name": "codeHookInput",
+            "type": "Object"
+          }
+        ],
+        "name": "LambdaFunctionNode_1",
+        "outputs": [
+          {
+            "name": "functionResponse",
+            "type": "String"
+          }
+        ],
+        "type": "LambdaFunction"
+      },
+      {
+        "configuration": {
+          "lambdaFunction": {
+            "lambdaArn": "arn:aws:lambda:eu-central-1:356161743682:function:Websearch:$LATEST"
+          }
+        },
+        "inputs": [
+          {
+            "expression": "$.data",
+            "name": "codeHookInput",
+            "type": "Object"
+          }
+        ],
+        "name": "LambdaFunctionNode_2",
+        "outputs": [
+          {
+            "name": "functionResponse",
+            "type": "String"
+          }
+        ],
+        "type": "LambdaFunction"
+      },
+      {
+        "configuration": {
+          "lambdaFunction": {
+            "lambdaArn": "arn:aws:lambda:eu-central-1:356161743682:function:Knowledge:$LATEST"
           }
         },
         "inputs": [
@@ -153,7 +233,29 @@
             "type": "String"
           }
         ],
-        "name": "LambdaFunctionNode_1",
+        "name": "LambdaFunctionNode_3",
+        "outputs": [
+          {
+            "name": "functionResponse",
+            "type": "Object"
+          }
+        ],
+        "type": "LambdaFunction"
+      },
+      {
+        "configuration": {
+          "lambdaFunction": {
+            "lambdaArn": "arn:aws:lambda:eu-central-1:356161743682:function:Claude:$LATEST"
+          }
+        },
+        "inputs": [
+          {
+            "expression": "$.data",
+            "name": "codeHookInput",
+            "type": "String"
+          }
+        ],
+        "name": "LambdaFunctionNode_4",
         "outputs": [
           {
             "name": "functionResponse",
@@ -168,6 +270,6 @@
   "id": "0XE4WXCT1P",
   "name": "TestFlow",
   "status": "NotPrepared",
-  "updatedAt": "2025-03-13T20:36:33.353856+00:00",
+  "updatedAt": "2025-03-14T07:37:28.450360+00:00",
   "version": "DRAFT"
 }

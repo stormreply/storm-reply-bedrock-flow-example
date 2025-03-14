@@ -19,7 +19,7 @@ function isValidConnection(connection) {
           <!-- Main handle (formerly top handle) -->
           <div class="input-item main-input-item">
             <Handle
-              id="node-handle"
+              id="hanlde-condition"
               :is-valid-connection="isValidConnection"
               type="target"
               :position="Position.Left"
