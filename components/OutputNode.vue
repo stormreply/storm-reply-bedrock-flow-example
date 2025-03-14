@@ -1,65 +1,44 @@
 <script setup>
 import { Handle } from "@vue-flow/core";
 import { Position } from "@vue-flow/core";
-
+// Output component
+const { nodeColor = "#6366f1" } = defineProps(["nodeColor"]);
 function isValidConnection(connection) {
   console.log(connection);
 }
 </script>
-
 <template>
-  <div class="vue-flow-node output-node node-size-small">
-    <div class="node-header">
-      <span class="node-title">Output</span>
+  <div
+    class="bg-white rounded-md shadow-md hover:shadow-lg"
+    :style="{ borderColor: nodeColor, borderWidth: '2px' }"
+  >
+    <!-- Output header section -->
+    <div
+      class="text-xl font-medium text-white relative flex items-center"
+      :style="{ backgroundColor: nodeColor }"
+    >
+      <Handle
+        id="handle-condition"
+        type="target"
+        :position="Position.Left"
+        class="handle-condition"
+        :is-valid-connection="isValidConnection"
+      />
+      <span class="ml-2 text-sm">Output</span>
     </div>
-    <div class="node-body">
-      <div class="node-grid">
-        <!-- Input handles on the left -->
-        <div class="inputs-column">
-          <!-- Main handle (formerly top handle) -->
-          <div class="input-item main-input-item">
-            <Handle
-              id="hanlde-condition"
-              :is-valid-connection="isValidConnection"
-              type="target"
-              :position="Position.Left"
-              class="handle-condition"
-            />
-            <div class="input-label">Main Input</div>
-          </div>
 
-          <!-- Regular input handles -->
-          <template v-for="target of $attrs.data.inputs" :key="target.name">
-            <div class="input-item">
-              <Handle
-                :id="target.name"
-                type="target"
-                :position="Position.Left"
-                class="handle-data"
-              />
-              <div class="input-label">{{ target.name }}</div>
-            </div>
-          </template>
-        </div>
-
-        <!-- Spacer column on the right -->
-        <div class="spacer-column"></div>
+    <!-- Input items -->
+    <template v-for="target of $attrs.data.inputs" :key="target.name">
+      <div class="p-1 pl-0 relative flex items-center">
+        <div class="ml-2 text-sm font-sm">{{ target.name }}</div>
+        <Handle
+          :id="target.name"
+          type="target"
+          :position="Position.Left"
+          class="handle-data"
+          :is-valid-connection="isValidConnection"
+        />
       </div>
-    </div>
+    </template>
   </div>
 </template>
-
-<style scoped>
-/* Component uses shared styles */
-.main-input-item {
-  margin-bottom: 4px;
-}
-
-.output-node {
-  border: 2px solid #2ec4b6;
-}
-
-.output-node .node-header {
-  background-color: #2ec4b6;
-}
-</style>

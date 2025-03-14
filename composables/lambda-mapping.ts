@@ -1,5 +1,5 @@
 // Main mapping object for specific Lambda ARNs
-const mapping: Record<string, LambdaMetadata> = {
+const mapping = {
   "arn:aws:lambda:eu-central-1:356161743682:function:Knowledge:$LATEST": {
     title: "Knowledge",
     nodeColor: "#2ecc71",
