@@ -7,7 +7,7 @@ export function transformNodes(nodes: BaseNode[]) {
   return nodes.map((node) => {
     return {
       id: node.name,
-      position: { x: 0, y: 0 },
+      position: {},
       data: {
         ...node,
       },

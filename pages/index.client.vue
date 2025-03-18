@@ -6,6 +6,8 @@ import { VueFlow, useVueFlow, Position } from "@vue-flow/core";
 import { transformConnections } from "~/lib/edge";
 import { Background } from "@vue-flow/background";
 import {
+  NodeEdge,
+  DataEdge,
   ConditionNode,
   InputNode,
   OutputNode,
@@ -22,12 +24,18 @@ const nodeTypes = {
   LambdaFunction: markRaw(LambdaFunctionNode),
 };
 
+const edgeTypes = {
+  Data: markRaw(DataEdge),
+  Conditional: markRaw(NodeEdge),
+};
+
 const edges = ref([]);
 const nodes = ref([]);
 onMounted(() => {
   nodes.value = transformNodes(Example.definition.nodes);
   edges.value = transformConnections(Example.definition.connections);
 });
+
 async function layoutGraph(direction) {
   nodes.value = layout(nodes.value, edges.value, direction);
   nextTick(() => {
@@ -37,6 +45,8 @@ async function layoutGraph(direction) {
 
 function onConnect(params) {
   const source = nodes.value.find((i) => i.id === params.source);
+
+  console.log(params);
 
   if (source.type === "Condition") {
     addEdges({ type: "Conditional", ...params });
@@ -51,6 +61,7 @@ function onConnect(params) {
     :nodes
     :edges
     :nodeTypes
+    :edgeTypes
     style="height: 100vh; width: 100%"
     @nodes-initialized="layoutGraph('LR')"
     @connect="onConnect"
@@ -58,11 +69,3 @@ function onConnect(params) {
     <Background pattern-color="#aaa" :gap="20"></Background>
   </VueFlow>
 </template>
-
-<style>
-.vue-flow__edge-path[type="Conditional"] {
-  stroke-dasharray: 5, 5; /* Creates a dotted line pattern (5px dash, 5px gap) */
-  stroke: red; /* Sets the color to red */
-  stroke-width: 1.5; /* Optional: makes the line slightly thicker */
-}
-</style>
